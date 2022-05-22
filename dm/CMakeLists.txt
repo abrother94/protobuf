@@ -17,6 +17,7 @@
 # See cmake_externalproject/CMakeLists.txt for all-in-one cmake build
 # that automatically builds all the dependencies before building dm.
 
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 cmake_minimum_required(VERSION 2.8)
 
 project(dm C CXX)
