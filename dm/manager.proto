@@ -24,7 +24,6 @@ package manager;
 option go_package = "./proto;manager";
 
 import "google/protobuf/empty.proto";
-//import "google/api/annotations.proto";
 
 message BasicAuth {
 	bool enabled = 1;
