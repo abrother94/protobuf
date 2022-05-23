@@ -1,13 +1,5 @@
 #!/bin/bash
-
-#///////////////////////////////////////////////////////////////////////////////////////////////
-#Build Env ubuntu 18.04 server
-#
-#
-#
-#refer to https://linuxtut.com/en/38dc86be2b55a9228b50/
-#///////////////////////////////////////////////////////////////////////////////////////////////
-
+sudo apt-get update
 sudo apt-get install autoconf automake libtool curl make g++ unzip
 git clone -b 3.6.x https://github.com/protocolbuffers/protobuf.git
 cd protobuf
@@ -15,15 +7,13 @@ git submodule update --init --recursive
 ./autogen.sh
 ./configure
 make
-make check
+#make check
 sudo make install
 sudo ldconfig
-
 export MY_INSTALL_DIR=$HOME/.local
 mkdir -p $MY_INSTALL_DIR
 export PATH="$PATH:$MY_INSTALL_DIR/bin"
 export PATH=$PATH:$HOME/.local/bin
-
 #sudo apt-get install cmake
 #wget -q -O cmake-linux.sh https://github.com/Kitware/CMake/releases/download/v3.17.0/cmake-3.17.0-Linux-x86_64.sh
 #sh cmake-linux.sh -- --skip-license --prefix=$MY_INSTALL_DIR
@@ -50,7 +40,6 @@ sudo make -j4 install
 rm -rf third_party/zlib
 cd ../../../../
 cd third_party/protobuf
-
 mkdir -p cmake/build
 cd cmake/build
 cmake -Dprotobuf_BUILD_TESTS=OFF -DCMAKE_BUILD_TYPE=Release ..
@@ -59,7 +48,6 @@ rm -rf third_party/protobuf
 cd ../../../../
 mkdir -p cmake/build
 cd cmake/build
-
 cmake \
   -DCMAKE_BUILD_TYPE=Release \
   -DgRPC_INSTALL=ON \
@@ -73,7 +61,6 @@ cmake \
 # in Debian8 env. still use openssl 1.0.1t version that not suppport "TSI_OPENSSL_ALPN_SUPPORT"
 sed -i 's/TSI_OPENSSL_ALPN_SUPPORT 1/TSI_OPENSSL_ALPN_SUPPORT 0/g' ../../src/core/tsi/ssl_transport_security.cc
 make install
-
 #cd ../../
 #cd examples/cpp/helloworld
 #mkdir -p cmake/build
